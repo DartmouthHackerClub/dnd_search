@@ -1,5 +1,11 @@
 
 <html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>DND Search</title>
+</head>
+<body>
+    <h1>DND Search</h1>
     <div id="err_msg"> {{ err_msg }} </div>
     <div id="search_box">
         <form action="search" method="get">
@@ -17,4 +23,5 @@
                 </ul>
             </div>
         {% endfor %}
+</body>
 </html>
