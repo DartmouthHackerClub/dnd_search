@@ -18,7 +18,7 @@ def search():
     if not query:
         err_msg = "Please specifiy a query"
     else:
-        results = lookup(query)
+        results = lookup(query, None)
 
     if results == None:
         results = []
