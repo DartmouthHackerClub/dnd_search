@@ -2,26 +2,28 @@
 <html>
 <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
     <title>DND Search</title>
 </head>
 <body>
-    <h1>DND Search</h1>
-    <div id="err_msg"> {{ err_msg }} </div>
+    <h1>dnd search</h1>
+ <!--   <div id="err_msg"> {{ err_msg }} </div> -->
     <div id="search_box">
         <form action="search" method="get">
-            <input type="text" name="query" />
-            <input type="submit" />
+            <input type="text" name="query" class="search_field"/>
+            <input type="submit" value="Search" class="search_button"/>
         </form>
     </div>
     <div id="results">
         {% for r in results %}
-            <div class="result">
+            <span class="result">
                 <ul>
                     {% for k,v in r.iteritems() %}
-                    <li>{{k}} : {{v}}</li>
+<!--                    <li>{{k}} : {{v}}</li> -->
+                        <li> {{v}}</li>
                     {% endfor %}
                 </ul>
-            </div>
+            </span>
         {% endfor %}
 </body>
 </html>

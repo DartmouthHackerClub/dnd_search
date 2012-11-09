@@ -13,22 +13,21 @@ def search():
     err_msg = ""
     raw_results = []
     results = []
-    attributes = ['cn','mail','dndAssignedNetid']
+    attributes = ['mail','dndAssignedNetid','cn','dndHinmanaddr','dndDeptclass','telephoneNumber']
 
     query = request.args.get('query')
 
     if not query:
-        err_msg = "Please specifiy a query"
+        err_msg = "Please specify a query"
     else:
         raw_results = lookup(query, None)
-
     if raw_results == None:
         results = []
         err_msg = "LDAP query failed"
 
     
     for result in raw_results:
-        result = { attribute: result[attribute] for attribute in attributes }
+        result = { attribute: result.get(attribute, []) for attribute in attributes }
         results.append(result)
 
     return render_template('search.html', results=results, err_msg=err_msg)
