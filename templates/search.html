@@ -16,11 +16,12 @@
     </div>
     <div id="results">
         {% for r in results %}
+            {% set name = r['cn']%}
             <span class="result">
+                <h3> {{ name[0] }} </h3>
                 <ul>
                     {% for k,v in r.iteritems() %}
-<!--                    <li>{{k}} : {{v}}</li> -->
-                        <li> {{v}}</li>
+                        <li> {{v[0]}}</li>
                     {% endfor %}
                 </ul>
             </span>
