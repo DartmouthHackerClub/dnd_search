@@ -1,46 +1,119 @@
-h1{
-    display: block;
-    border-bottom: 1px gray solid;
-    padding-left: 5px;
-    font-family: 'Orbitron', sans-serif;
-    color: rgb(51, 51, 51);
-    text-rendering: optimizelegibility;
-    background-color: rgb(0, 0, 0, 0);
+* {
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    font-family: 'Helvetica', "Arial", sans-serif;
+}
+
+#banner {
+    margin: 10px;
+    color: rgb(137, 137, 137);
+    float: left;
+}
+
+#banner > h1 {
+    font-size: 2.5em;
+    color: #00703C;
+}
+
+#banner > h2 {
+    margin-bottom: -10px;
+    color: #888888;
+    font-size: 1em;
 }
 
 body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 16px;
 }
-#search_box {
-    font: inherit;
+
+/* Make it so boxes can't go into the header. Has to do with how floats nest inside block elements*/
+.floatholder:after {
+    content: ".";
     display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
 }
 
-#search_box .search_button {
-    height: 2em;
-    background: lightgrey;
-    border: 1px solid;
-    border-radius: 5px;
-    margin: 5px;
+#search_box {
+    display: block;
+    float: left;
+    margin: 10px;
+    margin-top:23px;
 }
+
 #search_box .search_field {
-    height: 2em;
     border: 1px solid;
     border-radius:4px;
-    margin:5px;
-}
-.result {
-    float: left;
-    border-radius: 4px;
-    border: 1px solid;
-    padding: 2px;
-    width: 400px;
-    margin: 5px;
+
+    font-size: 2em;
+    width: 300px;
 }
 
-.result ul{
-    padding: 0 px;
-    display: inline;
+#examples {
+    color: #00703C;
+    font-size: 0.7em;
+    font-weight: bold;
+    float: left;
+    margin-top: 15px;
+    display:none;
+}
+
+#examples ul{
+    display:block;
+    font-weight: normal;
     list-style-type: none;
+}
+
+.result {
+    float: left;
+    border-radius: 8px;
+    border-style: solid;
+    border-color: gray;
+    border-width: 0px;
+    background-color: #f8f8f8;
+    padding: 10px;
+    white-space: nowrap;
+    width: 400px;
+    margin: 3px;
+}
+
+.result:hover {
+    background-color: #E6FFE6;
+}
+
+.result > .name {
+    font-size:1.2em;
+    font-weight: bold;
+    color: #333333;
+}
+
+.result > .email a {
+    font-size: 0.9em;
+    color: #666666;
+    text-decoration: none;
+}
+
+.result > .email a:hover {
+    color: #00703C;
+    font-weight: bold;
+}
+
+.result > .netid {
+    font-size: 0.9em;
+}
+
+.result > .hinman {
+    font-size: 0.9em;
+}
+
+.result > .class {
+    color: #00703C;
+    font-size:1.2em;
+    font-weight: bold;
+    float:right;
+}
+
+.result > .affil {
+    float:right;
+    clear:both;
 }

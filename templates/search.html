@@ -1,29 +1,10 @@
-
-<html>
-<head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
-    <title>DND Search</title>
-</head>
-<body>
-    <h1>dnd search</h1>
- <!--   <div id="err_msg"> {{ err_msg }} </div> -->
-    <div id="search_box">
-        <form action="search" method="get">
-            <input type="text" name="query" class="search_field"/>
-            <input type="submit" value="Search" class="search_button"/>
-        </form>
+{% for r in results %}
+    <div class="result floatholder">
+        <div class="class">{{ r['Class'] }}</div>
+        <div class="affil">{{ r['Affiliation'] }}</div>
+        <div class="name">{{ r['Name'] }}</div>
+        <div class="email"><a href="mailto:{{r['Email']}}">{{ r['Email'] }}</a></div>
+        <div class="netid">Net ID: {{ r['Net ID'].lower() }}</div>
+        <div class="hinman">Hinman: {{ r['Hinman'] }}</div>
     </div>
-    <div id="results">
-        {% for r in results %}
-            <span class="result">
-                <ul>
-                    {% for k,v in r.iteritems() %}
-<!--                    <li>{{k}} : {{v}}</li> -->
-                        <li> {{v}}</li>
-                    {% endfor %}
-                </ul>
-            </span>
-        {% endfor %}
-</body>
-</html>
+{% endfor %}

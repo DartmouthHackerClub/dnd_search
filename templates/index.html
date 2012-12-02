@@ -1,0 +1,96 @@
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <title>DND Search</title>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+        var default_text = 'Search';
+
+        $('#searchField').focus(function() {
+            if ($(this).val() == default_text) {
+                $(this).css('color', 'black');
+                $(this).val('');
+            }
+
+            if ($(this).val() == '') {
+               $('#examples').show(); 
+            }
+        });
+
+        $('#searchField').blur(function() {
+            if ($(this).val() == '') {
+                $(this).css('color', 'gray');
+                $(this).val(default_text);
+            }
+            $('#examples').hide(); 
+        });
+        $('#searchField').blur();
+
+        var last_update = new Date().getTime();
+        var last_query = '';
+
+        $('#searchField').on('input', function(e) {
+            var last_update = e.timeStamp;
+
+            if ($(this).val() == '') {
+                $('#examples').show();
+            } else {
+                $('#examples').hide();
+            }
+        });
+
+        setInterval(function() {
+
+            var cur_time = new Date().getTime(); 
+            var diff = cur_time - last_update;
+
+            var cur_query = $('#searchField').val();
+
+            // Only update if the text hasn't changed for 2 seconds
+            // and the query has changed since it was last sent. Leave the
+            // previous result if the text box is empty
+            if (diff >= 2000 && cur_query != last_query && cur_query != '' && cur_query != default_text) { 
+                $.get('search', $('#searchForm').serialize(), function(html) {
+                    $('#results').html(html);
+                });
+                last_query = cur_query;
+            }
+
+        }, 1000);
+    });
+
+</script>
+</head>
+<body>
+    <div id="header" class="floatholder">
+        <div id="banner">
+            <h2>hacker club's</h2>
+            <h1>dnd search</h1>
+        </div>
+     <!--   <div id="err_msg"> {{ err_msg }} </div> -->
+        <div id="search_box">
+            <form id="searchForm" onsubmit="return false">
+                <input type="text" id="searchField" name="query" class="search_field"/>
+            </form>
+        </div>
+        <div id="examples">
+            Examples:
+            <ul>
+                <li>james 14</li>
+                <li>charlotte johnson</li>
+                <li>wackynickname</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="results">
+        {% include "search.html" %}
+    </div>
+
+</body>
+</html>

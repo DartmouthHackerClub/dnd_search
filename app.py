@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return redirect('/search')
+    return render_template('index.html', results=[], err_msg="")
 
 @app.route("/search")
 def search():
@@ -20,17 +20,16 @@ def search():
     if not query:
         err_msg = "Please specify a query"
     else:
-        raw_results = lookup(query, None)
-    if raw_results == None:
+        results = lookup(query)
+
+    if results == None:
         results = []
         err_msg = "LDAP query failed"
 
-    
-    for result in raw_results:
-        result = { attribute: result.get(attribute, []) for attribute in attributes }
-        results.append(result)
-
-    return render_template('search.html', results=results, err_msg=err_msg)
+    if request.is_xhr:
+        return render_template('search.html', results=results, err_msg=err_msg)
+    else:
+        return render_template('index.html', results=results, err_msg=err_msg)
 
 if __name__ == "__main__":
     app.run(debug=True)
