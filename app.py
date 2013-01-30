@@ -32,4 +32,4 @@ def search():
         return render_template('index.html', results=results, err_msg=err_msg)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
