@@ -2,7 +2,11 @@
 <div class="row">
 	<div class="col">
 		<h2 class="pull-left"><a href="mailto:{{ result.email }}">{{ result.name }}</a></h2>
+		{% if 'Student' in result.affiliations %}
 		<h2 class="pull-right">{{ result.department }}</h2>
+		{% else %}
+		<h2 class="pull-right">{{ result.affiliations[0] }}</h2>
+		{% endif %}
 	</div>
 </div>
 <div class="row">
