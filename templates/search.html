@@ -1,10 +1,26 @@
-{% for r in results %}
-    <div class="result floatholder">
-        <div class="class">{{ r['Class'] }}</div>
-        <div class="affil">{{ r['Affiliation'] }}</div>
-        <div class="name">{{ r['Name'] }}</div>
-        <div class="email"><a href="mailto:{{r['Email']}}">{{ r['Email'] }}</a></div>
-        <div class="netid">Net ID: {{ r['Net ID'].lower() }}</div>
-        <div class="hinman">Hinman: {{ r['Hinman'] }}</div>
-    </div>
+{% for result in results %}
+<div class="row">
+	<div class="col">
+		<h2 class="pull-left"><a href="mailto:{{ result.email }}">{{ result.name }}</a></h2>
+		<h2 class="pull-right">{{ result.department }}</h2>
+	</div>
+</div>
+<div class="row">
+	<div class="col col-lg-12">
+		<address>
+			<strong>Blitz:</strong> <a href="mailto:{{ result.email }}">{{ result.email }}</a></br>
+			{% if result.hinman %}
+			<strong>Hinman:</strong> {{ result.hinman }}<br />
+			{% endif %}
+			{% if result.phone %}
+			<strong>Phone:</strong> {{ result.phone }}<br />
+			{% endif %}
+			{% if result.website %}
+			<strong>Website:</strong> <a href="{{ result.website }}">{{ result.website }}</a><br />
+			{% endif %}
+			<strong>ID:</strong> {{ result.uid }}
+		</address>
+	</div>
+</div>
+<hr />
 {% endfor %}
