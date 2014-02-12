@@ -1,8 +1,10 @@
 from flask import Flask, request, render_template
 import requests
-import re
+import os
 
 app = Flask(__name__)
+apikey = os.environ.get("DND_API_KEY", "testkey")
+keydict = dict(apikey=apikey)
 
 @app.route("/")
 def index():
@@ -11,7 +13,7 @@ def index():
 @app.route("/search")
 def search():
     query = request.args.get('query')
-    results = requests.get("http://dnd.hackdartmouth.org/%s" % query).json()
+    results = requests.get("http://dnd.hackdartmouth.org/%s" % query, params=keydict).json()
 
     if request.is_xhr:
         return render_template('search.html', results=results)
