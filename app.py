@@ -13,7 +13,7 @@ def index():
 @app.route("/search")
 def search():
     query = request.args.get('query')
-    results = requests.get("http://dnd.hackdartmouth.org/%s" % query, params=keydict).json()
+    results = requests.get("http://dnd-api.hackdartmouth.org/%s" % query, params=keydict).json()
 
     if request.is_xhr:
         return render_template('search.html', results=results)
